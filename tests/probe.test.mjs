@@ -1,5 +1,5 @@
 /**
- * dsh-model-health 验收脚本（SPEC §14 AC1–AC19、§15.1）。
+ * dsh-model-health-probe 验收脚本（SPEC §14 AC1–AC19、§15.1）。
  *
  * 全部用例**不联网**：用本地 node:http 服务器模拟三协议响应。
  * 覆盖矩阵：三协议 × {非流式, 流式} × {成功, 严格校验不符, 非 2xx, 无终止标记}
@@ -737,8 +737,8 @@ describe("错误映射（§10.1）", () => {
     const r = await executeProbe({
       routeKey: "r1",
       displayName: "r1",
-      baseURL: "http://this-host-does-not-exist-dsh-model-health.invalid",
-      baseURLNormalized: "http://this-host-does-not-exist-dsh-model-health.invalid",
+      baseURL: "http://this-host-does-not-exist-dsh-model-health-probe.invalid",
+      baseURLNormalized: "http://this-host-does-not-exist-dsh-model-health-probe.invalid",
       api: "openai-completions",
       modelId: "m1",
       stream: false,
@@ -2083,14 +2083,12 @@ describe("AC11 密钥泄漏：四面扫描", () => {
     assert.deepEqual(modified, [], `插件运行期间不得改写文件：${modified.join(", ")}`);
 
     // 候选状态文件目录：插件声明不落盘，这里对常见落点做存在性 + 内容扫描。
-    // 同时保留改名前的旧名路径（`dsh-model-health`）：改名后若仍有旧名残留文件，
-    // 也应被扫到——只扫新名会漏掉「改名前的落盘」这类回归。
+    // 只扫当前包名对应的路径——插件从未落盘（AC12 已证「新增文件 = 0」），
+    // 保留历史旧名路径只会扫到恒不存在的死路径，反而让断言看起来比实际更严。
     const candidates = [
       join(root, "state.json"),
       join(root, ".dsh-model-health-probe", "state.json"),
-      join(root, ".dsh-model-health", "state.json"),
-      join(process.env.USERPROFILE ?? "", ".dsh", "model-health-probe", "state.json"),
-      join(process.env.USERPROFILE ?? "", ".dsh", "model-health", "state.json")
+      join(process.env.USERPROFILE ?? "", ".dsh", "model-health-probe", "state.json")
     ];
     const scanned = [];
     for (const c of candidates) {

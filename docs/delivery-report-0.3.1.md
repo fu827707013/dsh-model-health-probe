@@ -1,9 +1,9 @@
-# 交付报告：dsh-model-health 0.3.1 — 响应内容放大弹窗 + JSON 格式化
+# 交付报告：dsh-model-health-probe 0.3.1 — 响应内容放大弹窗 + JSON 格式化
 
 > 日期：2026-09-18
 > 版本：**0.2.1 → 0.3.1**（0.3.0 为中间态，0.3.1 含 `box-sizing` 修复）
 > 被测源码：`lib/client.js` = **132,793 字节**
-> 已装副本：`~/.dsh/profiles/web/node_modules/dsh-model-health`，**7/7 逐字节一致**
+> 已装副本：`~/.dsh/profiles/web/node_modules/dsh-model-health-probe`，**7/7 逐字节一致**
 
 ---
 
@@ -91,7 +91,7 @@ tests 259   suites 37   pass 259   fail 0   duration_ms 6179
 ### 4.2 验收脚本
 
 ```
-=== dsh-model-health 验收报告 ===
+=== dsh-model-health-probe 验收报告 ===
 用例总数: 110    通过: 110    失败: 0
 密钥四面: face1(响应)=0 face2(日志)=0 face3(状态文件)=0 face4(error)=0
 明文总命中=0 | 新增文件=0 改写文件=0

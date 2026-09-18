@@ -1,5 +1,5 @@
 /**
- * dsh-model-health 验收入口（SPEC §15.1、AC1）。
+ * dsh-model-health-probe 验收入口（SPEC §15.1、AC1）。
  *
  * 本文件是**运行器**：以编程方式执行 tests/probe.test.mjs 的全部用例并输出
  * JSON 报告到 tests/report.json（SPEC §15.4 证据留存）。
@@ -251,9 +251,7 @@ async function scanFourFaces() {
   const stateCandidates = [
     join(root, "state.json"),
     join(root, ".dsh-model-health-probe", "state.json"),
-    join(root, ".dsh-model-health", "state.json"),
-    join(process.env.USERPROFILE ?? "", ".dsh", "model-health-probe", "state.json"),
-    join(process.env.USERPROFILE ?? "", ".dsh", "model-health", "state.json")
+    join(process.env.USERPROFILE ?? "", ".dsh", "model-health-probe", "state.json")
   ];
   let stateText = "";
   for (const c of stateCandidates) if (existsSync(c)) stateText += readFileSync(c, "utf8");

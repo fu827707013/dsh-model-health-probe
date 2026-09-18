@@ -1,4 +1,4 @@
-# 功能规格书：dsh-model-health —— DSH 会话视图「模型健康检查」插件
+# 功能规格书：dsh-model-health-probe —— DSH 会话视图「模型健康检查」插件
 
 > 状态：v1.0.7 已冻结（2026-09-18）。本文件是 t4（宿主实现）、t15（客户端实现）、t16（验证）、t17（评审）、t13（集成发布）的唯一实现依据。
 > 配套文件：同目录 `ASSUMPTIONS.md`（假设登记表）、`CHANGE-REQUEST-001-credential-validation.md`（§8.1 变更单）、`CHANGE-REQUEST-002-cascade-selection.md`（§7.6 级联变更单）、`ui-spec.md`（视觉与交互，由 ui-designer 独立产出）。
@@ -972,7 +972,7 @@ strict: fail  "响应文本为「OK！」，与期望值「OK」不完全一致"
 ### 15.1 机器验证（t4 交付物）
 
 ```powershell
-# 工作目录：D:\Company\dsh-plugin\dsh-model-health
+# 工作目录：D:\Company\dsh-plugin\dsh-model-health-probe
 
 # 0) 单元测试（唯一验收命令；不要写 node --test tests/，见 §15.1b）
 #    ★必须自报用例数且 > 0（零用例守卫，见 AC22）

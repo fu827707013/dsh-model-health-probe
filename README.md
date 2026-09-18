@@ -4,7 +4,7 @@ DSH（DeepSeek Harness）插件：在**会话视图**内新增「**模型健康�
 
 > **这是一个手动探针，不是监控系统。** 不轮询、不监控、不告警、不做历史趋势、不落盘。它提供的是**用户显式启动、成功即停的有限重试会话**（见下文「自动重试」）——那**不是**后台常驻监控：单例运行、成功即停、结束不自动重启。
 
-> **包名说明**：本插件是 `dsh-model-health-probe`（源码目录仍叫 `dsh-model-health`）。带 `-probe` 后缀是因为 npm 上 `dsh-model-health` 已被第三方占用，详见下文「安装」。
+> **包名说明**：本插件的包名与源码目录**都是** `dsh-model-health-probe`。带 `-probe` 后缀是因为 npm 上 `dsh-model-health` 已被第三方占用，详见下文「安装」。
 
 ![面板总览](docs/images/01-panel-overview.png)
 
@@ -152,11 +152,11 @@ DSH Web GUI → **会话视图**（对话页）顶部页签栏 → 「**模型�
 
 ```powershell
 # 1) 打包（在插件目录内）
-cd D:\Company\dsh-plugin\dsh-model-health
+cd D:\Company\dsh-plugin\dsh-model-health-probe
 npm pack
 
 # 2) 安装进 web profile（--profile web 为必需参数；dsh plugin 是 pnpm 代理）
-dsh plugin --profile web add D:\Company\dsh-plugin\dsh-model-health\dsh-model-health-probe-<版本>.tgz
+dsh plugin --profile web add D:\Company\dsh-plugin\dsh-model-health-probe\dsh-model-health-probe-<版本>.tgz
 ```
 
 > **★ 包名是 `dsh-model-health-probe`，不是 `dsh-model-health`。**
@@ -164,8 +164,6 @@ dsh plugin --profile web add D:\Company\dsh-plugin\dsh-model-health\dsh-model-he
 > 因此：
 > - 安装**必须带本地 tgz 路径**，不要用裸包名 `dsh plugin --profile web add dsh-model-health`（那会经 pnpm 查 registry，装到别人的包）；
 > - profile 依赖保持 `file:` 形式，**不要**改成版本号范围。
->
-> 该问题在 `docs/review-report.md` 的 **F-R-12** 有完整记录。
 
 `dsh plugin add` 成功后会**自动**把 `dsh-model-health-probe` 写入 profile 的 `dependencies` 与 `dsh.profile.bundles`（因为本包声明了 `dsh.bundle.patch`）。
 
