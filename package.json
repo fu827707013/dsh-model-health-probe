@@ -1,6 +1,6 @@
 {
   "name": "dsh-model-health-probe",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "DSH 模型健康检查：在会话视图新增「模型健康检查」页签，按「供应商(baseURL分组) → API类型 → 模型 → 路由」四行按钮选定目标，手动发送一条真实裸 HTTP 测试请求（支持 openai-completions / openai-responses / anthropic-messages 三协议，流式与非流式可切），一屏展示耗时、TTFT、HTTP 状态、token 用量、响应内容与三层诊断链（API请求 / 模型响应 / 严格校验），错误全部人话化。可把当前模型一键设为默认（下次打开即预选）。另提供用户显式启动、成功即停的有限自动重试会话（严格/连通两种成功判定、4 条停止条件、致命错误不短路）。不做后台监控、不轮询、不告警、不落盘。",
   "keywords": [
     "deepseek-harness",
