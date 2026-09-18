@@ -24,6 +24,23 @@ import { dirname, join } from "node:path";
 const here = dirname(fileURLToPath(import.meta.url));
 const testFile = join(here, "probe.test.mjs");
 
+/*
+ * ★ 缺测试文件时必须**显式失败**，不能走「0 用例 → 结论: 全部通过 ✅」。
+ *
+ * 仓库里故意不含 tests/*.test.mjs（内嵌本机真实供应商配置，属本地开发资产）。
+ * 若这里不拦，别人 clone 后跑 `npm run acceptance` 会看到
+ * 「用例总数: 0 / 失败: 0 / 结论: 全部通过 ✅」——那是彻头彻尾的假绿，
+ * 比报错危险得多。
+ */
+if (!existsSync(testFile)) {
+  console.error(
+    "[model-health] 验收无法执行：未找到 tests/probe.test.mjs。\n" +
+      "  本仓库不含测试套件（用例内嵌本机真实供应商配置，属本地开发资产）。\n" +
+      "  这**不是通过**，是「无用例可验」——请在本机开发目录中运行。"
+  );
+  process.exit(2);
+}
+
 /** 收集每个用例的结果。 */
 const cases = [];
 

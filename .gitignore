@@ -16,8 +16,32 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# ============================================================================
+# 本地开发资产（不公开）：含本机真实供应商配置
+# ============================================================================
+# 下面这些文件记录的是本机真实环境：真实供应商域名、路由名、密钥环境变量名、
+# 本机配置的计数基线（provider 12 / 供应商组 6 / 路由 12 等）。
+# 它们对本机开发有价值，但**不适合进入公开仓库**，故仅本地保留。
+#
+# 注意：文件**原地保留**（路径不变），本机 `npm test` 与 `npm run acceptance`
+# 照常可用；只是不再提交到远端。
+docs/SPEC.md
+docs/ui-spec.md
+docs/ASSUMPTIONS.md
+docs/CHANGE-REQUEST-001-credential-validation.md
+docs/CHANGE-REQUEST-002-cascade-selection.md
+
+# 一次性过程审计报告（绑定当时的文件哈希，属开发过程证据）
 docs/render-report.md
 docs/review-report.md
 docs/integration-report.md
 docs/test-report.md
 docs/delivery-report-0.2.1.md
+docs/delivery-report-0.3.1.md
+
+# 测试套件（用例内嵌本机真实供应商配置作为回归基线）
+tests/probe.test.mjs
+tests/default-model.test.mjs
+tests/host-endpoints.test.mjs
+tests/client-retry-default.test.mjs

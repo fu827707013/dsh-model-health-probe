@@ -4,7 +4,7 @@ DSH（DeepSeek Harness）插件：在**会话视图**内新增「**模型健康�
 
 > **这是一个手动探针，不是监控系统。** 不轮询、不监控、不告警、不做历史趋势、不落盘。它提供的是**用户显式启动、成功即停的有限重试会话**（见下文「自动重试」）——那**不是**后台常驻监控：单例运行、成功即停、结束不自动重启。
 
-> **包名说明**：本插件的包名与源码目录**都是** `dsh-model-health-probe`。带 `-probe` 后缀是因为 npm 上 `dsh-model-health` 已被第三方占用，详见下文「安装」。
+> **包名**：`dsh-model-health-probe`。源码目录、包名、`origin` 仓库三者同名。
 
 ![面板总览](docs/images/01-panel-overview.png)
 
@@ -30,7 +30,7 @@ DSH Web GUI → **会话视图**（对话页）顶部页签栏 → 「**模型�
 
 按「**供应商（baseURL 分组）→ API 类型 → 模型 → 路由**」四行自上而下逐行点选，每一行的候选由上一行的选择推导：
 
-1. **供应商**：按归一化 baseURL 分组（**只去尾部斜杠**，绝不增删 `/v1`）。因此 `https://happycodeai.com` 与 `https://happycodeai.com/v1` 是**两个不同分组**——这不是 bug，而是配置事实。
+1. **供应商**：按归一化 baseURL 分组（**只去尾部斜杠**，绝不增删 `/v1`）。因此 `https://api.example.com` 与 `https://api.example.com/v1` 是**两个不同分组**——这不是 bug，而是配置事实。
 2. **API 类型**：同一 baseURL 下可能挂多种协议（例如 `anthropic-messages` 与 `openai-completions` 各一条），按声明去重列出。
 3. **模型**：该分组内模型按 id 去重后的并集。
 4. **路由**：**仅当所选模型被多条路由声明时才出现**（即该模型的 `routeKeys.length > 1`）。否则该路由自动成为目标，第四行整行隐藏。
@@ -159,11 +159,8 @@ npm pack
 dsh plugin --profile web add D:\Company\dsh-plugin\dsh-model-health-probe\dsh-model-health-probe-<版本>.tgz
 ```
 
-> **★ 包名是 `dsh-model-health-probe`，不是 `dsh-model-health`。**
-> npm 上 `dsh-model-health` 这个无 scope 包名**已被第三方（发布者 `oxlyn6`）占用**，是另一个插件（TypeScript + tsdown 构建、做在**设置页**；本插件是零构建、做在**会话视图**）。
-> 因此：
-> - 安装**必须带本地 tgz 路径**，不要用裸包名 `dsh plugin --profile web add dsh-model-health`（那会经 pnpm 查 registry，装到别人的包）；
-> - profile 依赖保持 `file:` 形式，**不要**改成版本号范围。
+> **安装方式说明**：本插件当前以**本地 tgz** 分发，因此安装请带**完整路径**（不要用裸包名，否则 pnpm 会去 registry 解析）。
+> profile 依赖保持 `file:` 形式，**不要**改成版本号范围。
 
 `dsh plugin add` 成功后会**自动**把 `dsh-model-health-probe` 写入 profile 的 `dependencies` 与 `dsh.profile.bundles`（因为本包声明了 `dsh.bundle.patch`）。
 
