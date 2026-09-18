@@ -1,0 +1,13 @@
+# dsh-model-health-probe bundle patch: inserts the plugin row into the profile
+# roster. The row is a bare plugin by package name: the node half (exports ".")
+# runs in the host process (settings read + three-protocol bare-HTTP probe +
+# HTTP endpoints + in-memory record ring), and the `dsh.client` declaration in
+# package.json makes the browser half (exports "./client", served at
+# /plugins/<id>/client.js) load in the web GUI.
+#
+# 包名带 -probe 后缀的原因：npm 上 `dsh-model-health` 已被第三方（发布者
+# oxlyn6）占用，同名会导致 `npm publish` 撞名、且裸包名安装会装到别人的包。
+# 详见 docs/review-report.md 的 F-R-12。
+- insert:
+    - id: model-health-probe
+      name: dsh-model-health-probe

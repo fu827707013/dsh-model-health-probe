@@ -1,0 +1,23 @@
+# 依赖与构建产物
+node_modules/
+
+# 打包产物（用 git tag + GitHub Release 分发，不提交 tgz）
+*.tgz
+
+# 测试临时状态文件
+test-state-*.json
+
+# 测试运行产物（每次跑 acceptance 都会重写，属运行时输出而非源码）
+tests/report.json
+
+# 系统杂项
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+docs/render-report.md
+docs/review-report.md
+docs/integration-report.md
+docs/test-report.md
+docs/delivery-report-0.2.1.md
